@@ -1,0 +1,19 @@
+spring:
+  resources:
+    static-locations: classpath:templates/
+
+# OSS相关配置信息
+aliyun:
+  oss:
+    endpoint:  # oss对外服务的访问域名
+    accessKeyId:  # 访问身份验证中用到用户标识
+    accessKeySecret:  # 用户用于加密签名字符串和oss用来验证签名字符串的密钥
+    bucketName:  # oss的存储空间
+    policy:
+      expire: 30 # 签名有效期(S)
+    maxSize: 10 # 上传文件大小(M)
+    callback: http://localhost:8080/aliyun/oss/callback # 文件上传成功后的回调地址
+    dir:
+      prefix: oss/images/ # 上传文件夹路径前缀  `
+
+
