@@ -5,10 +5,25 @@
     <!-- import CSS -->
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 </head>
+<style>
+    .screenshot{
+        margin-top: 80px;
+        position: relative;
+    }
+</style>
 <body>
 <div id="app">
     <div>选择图片:<input type="file" ref="file"></div>
-    <el-button type="primary" @click="getPolicy">保存图片</el-button>
+    <el-button type="primary" @click="getPolicy">上传</el-button>
+    <!--图片部分-->
+    <div id="screenshot" class="screenshot">
+        <span v-for="(imgUrl, index) in srcList" :key="index" class="slideshow">
+          <el-image style="width:175px; height: 116px"
+                    :src="imgUrl"
+                    :preview-src-list="srcList"
+          />
+        </span>
+    </div>
 </div>
 </body>
 <!-- import Vue before Element -->
@@ -23,6 +38,7 @@
             return {
                 dialogImageUrl: '',
                 dialogVisible: false,
+                srcList: []
             };
         },
         methods: {
@@ -50,13 +66,14 @@
                 formData.append('policy', ossToken.policy); //policy
                 formData.append('Signature', ossToken.signature); //签名
                 formData.append('callback', ossToken.callback); //回调
-                //如果是base64文件，那么直接把base64字符串转成blob对象进行上传就可以了
                 formData.append('success_action_status', 200); //成功后返回的操作码
+                //如果是base64文件，那么直接把base64字符串转成blob对象进行上传就可以了
                 formData.append("file",file);
-                axios.post('https://oss.lihaijian.top',formData,{
+                axios.post(ossToken.host,formData,{
                     'Content-Type':'multipart/form-data'
                 }).then(res=>{
                    console.log(res)
+                    this.srcList.push(res.data.resultContent.filename);
                 })
 
             }
