@@ -20,7 +20,4 @@
 
 默认访问方式为下载
 
-![image-20200812085127538](https://i.loli.net/2020/08/12/d7pIMcovj5F8TUe.png)
-
-![image-20200812085237228](https://i.loli.net/2020/08/12/aKzxWfgu7XEotcC.png)
 
